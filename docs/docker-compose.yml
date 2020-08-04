@@ -3,21 +3,21 @@ services:
   openvpn:
     cap_add:
      - NET_ADMIN
-    image: awalach/openvpn
-    container_name: openvpn
+    image: zzzbatmand/openvpn
+    container_name: openvpn-if
     ports:
-     - "1194:1194/udp"
+     - "1198:1194/udp"
     restart: always
     depends_on:
       - "gui"
     volumes:
-     - ./openvpn-data/conf:/etc/openvpn
+     - ovpn-as-data:/etc/openvpn
   gui:
-    image: awalach/openvpn-web-ui
+    image: zzzbatmand/openvpn-web-ui
     container_name: openvpn-gui
     ports:
-     - "8080:8080/tcp"
+     - "8090:8080/tcp"
     restart: always
     volumes:
-     - ./openvpn-data/conf:/etc/openvpn
-     - ./openvpn-data/db:/opt/openvpn-gui/db
+     - ovpn-as-data:/etc/openvpn
+     - ovpn-as-db:/opt/openvpn-gui/db
